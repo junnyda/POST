@@ -90,4 +90,24 @@
 			board_idx = #{boardIdx}
 	]]>		
 	</update>
+	
+	<insert id="insertBoardFileList" parameterType="board.dto.BoardFileDto">
+		<![CDATA[
+			INSERT INTO t_file
+			( board_idx, original_file, stored_file_path, file_size,
+				creator_id, ctrated_datetime
+			)
+			VALUES
+			]]>
+		<foreach collection="list" item="item" separator=",">
+			(
+				#{item.boardIdx},
+				#{item.originalFileName},
+				#{item.storedFilePath},
+				#{item.fileSize},
+				'admin',
+				NOW()				
+			)
+		</foreach>
+	</insert>
 </mapper>
